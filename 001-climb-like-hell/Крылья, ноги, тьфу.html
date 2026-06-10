@@ -1,0 +1,639 @@
+
+				<!DOCTYPE html>
+				<html>
+					<head>
+						<meta charset="UTF-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1" />
+						<link rel="stylesheet" href="pluginAssets/jsdraw__markdownIt_editDrawingButton/markdownIt.css"><script type="application/javascript" src="pluginAssets/jsdraw__markdownIt_editDrawingButton/markdownIt-content.js"></script><link rel="stylesheet" href="pluginAssets/highlight.js/atom-one-light.css">
+						<title>Крылья, ноги, тьфу...</title>
+					</head>
+					<body>
+						<div class="exported-note"><div class="exported-note-title">Крылья, ноги, тьфу...</div>
+
+<style>
+		/* https://necolas.github.io/normalize.css/ */
+		html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+		article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}
+		pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}
+		b,strong{font-weight:bolder}small{font-size:80%}img{border-style:none}
+
+		body {
+			font-size: 15px;
+			color: #32373F;
+			word-wrap: break-word;
+			line-height: 1.6em;
+			background-color: #ffffff;
+			font-family: 'Avenir Next', 'Avenir', 'Arial', sans-serif;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		kbd {
+			border: 1px solid rgb(220, 220, 220);
+			box-shadow: inset 0 -1px 0 rgb(220, 220, 220);
+			padding: 2px 4px;
+			border-radius: 3px;
+			background-color: rgb(243, 243, 243);
+		}
+
+		:root {
+			--scrollbar-size: 7px;
+		}
+
+		::-webkit-scrollbar {
+			width: var(--scrollbar-size);
+			height: var(--scrollbar-size);
+		}
+		::-webkit-scrollbar-thumb {
+			border-radius: calc(var(--scrollbar-size) / 2);
+		}
+		::-webkit-scrollbar-corner {
+			background: none;
+		}
+		::-webkit-scrollbar-track {
+			border: none;
+		}
+		::-webkit-scrollbar-thumb {
+			background: rgba(50, 55, 63, 0.54); 
+		}
+		::-webkit-scrollbar-track:hover {
+			background: rgba(0, 0, 0, 0.1); 
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: rgba(50, 55, 63, 0.63); 
+		}
+
+		
+
+		/* Remove top padding and margin from first child so that top of rendered text is aligned to top of text editor text */
+
+		#rendered-md > h1:first-child,
+		#rendered-md > h2:first-child,
+		#rendered-md > h3:first-child,
+		#rendered-md > h4:first-child,
+		#rendered-md > ul:first-child,
+		#rendered-md > ol:first-child,
+		#rendered-md > table:first-child,
+		#rendered-md > blockquote:first-child,
+		#rendered-md > img:first-child,
+		#rendered-md > p:first-child {
+			margin-top: 0;
+			padding-top: 0;
+		}
+		
+		p, h1, h2, h3, h4, h5, h6, ul, table {
+			margin-top: .6em;
+			margin-bottom: 1.35em;
+
+			/*
+				Adds support for RTL text in the note body. It automatically detects the direction using the content.
+				Issue: https://github.com/laurent22/joplin/issues/3991
+			*/
+			unicode-bidi: plaintext;
+		}
+
+		h1, h2, h3, h4, h5, h6, ul, table {
+			margin-bottom: 0.65em;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			line-height: 1.5em;
+		}
+		h1 {
+			font-size: 1.5em;
+			font-weight: bold;
+			border-bottom: 1px solid #dddddd;
+			padding-bottom: .3em;
+		}
+		h2 {
+			font-size: 1.3em;
+			font-weight: bold;
+			padding-bottom: .1em; */
+		}
+		h3 {
+			font-size: 1.1em;
+			font-weight: bold;
+		}
+		h4, h5, h6 {
+			font-size: 1em;
+			font-weight: bold;
+		}
+
+		.exported-note-title {
+			font-size: 2em;
+			font-weight: bold;
+			margin-bottom: 0.8em;
+			line-height: 1.5em;
+			padding-bottom: .35em;
+			border-bottom: 1px solid #dddddd;
+		}
+
+		a {
+			color: #155BDA;
+		}
+		ul, ol {
+			padding-left: 0;
+			margin-left: 1.7em;
+		}
+		li {
+			margin-bottom: .4em;
+		}
+		li p {
+			margin-top: 0.2em;
+			margin-bottom: 0;
+		}
+
+		dt {
+			font-weight: bold;
+			margin-bottom: 0.25em;
+		}
+
+		dd {
+			margin-inline-start: 2.5em;
+			margin-bottom: 0.5em;
+		}
+
+		.resource-icon {
+			display: inline-block;
+			position: relative;
+			top: 0.3em;
+			text-decoration: none;
+			width: 1.2em;
+			height: 1.4em;
+			margin-right: 0.4em;
+			background-color:  #155BDA;
+		}
+    /* These icons are obtained from the wonderful ForkAwesome project by copying the src svgs 
+     * into the css classes below.
+     * svgs are obtained from https://github.com/ForkAwesome/Fork-Awesome/tree/master/src/icons/svg
+     * instead of the svg width, height property you must use a viewbox here, 0 0 1536 1792 is typically the actual size of the icon
+     * each line begins with the pre-amble -webkit-mask: url("data:image/svg+xml;utf8,
+     * and of course finishes with ");
+     * to prevent artifacts it is also necessary to include -webkit-mask-repeat: no-repeat;
+     * on the following line
+     * */
+		.fa-joplin {
+			/* Awesome Font file */
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M373.834 128C168.227 128 0 296.223 0 501.834v788.336C0 1495.778 168.227 1664 373.834 1664h788.336c205.608 0 373.83-168.222 373.83-373.83V501.834C1536 296.224 1367.778 128 1162.17 128zm397.222 205.431h417.424a7.132 7.132 0 0 1 7.132 7.133v132.552c0 4.461-3.619 8.073-8.077 8.073h-57.23c-24.168 0-43.768 19.338-44.284 43.374v2.377h-.017v136.191h-.053l-.466 509.375c-5.02 77.667-39.222 149.056-96.324 201.046-60.28 54.834-141.948 85.017-229.962 85.017-12.45 0-25.208-.61-37.907-1.785-92.157-8.682-181.494-48.601-251.662-112.438-71.99-65.517-117.147-150.03-127.164-238-11.226-98.763 23.42-192.783 95.045-257.937 81.99-74.637 198.185-101.768 316.613-75.704 5.574 1.227 9.55 6.282 9.55 11.997v199.52c-.199 2.625-1.481 6.599-8.183 2.896-.663-.365-1.194-.511-1.653-.531-21.987-10.587-45.159-17.57-68.559-19.916-.38-.04-.757-.124-1.138-.163-.537-.048-1.034-.033-1.556-.075-4.13-.354-8.183-.517-12.203-.58-.87-.011-1.771-.127-2.641-.127-.486 0-.951.05-1.437.057-1.464.011-2.886.115-4.33.163-2.76.102-5.497.211-8.182.448-.273.024-.547.07-.835.097-25.509 2.4-47.864 11.104-65.012 25.47-.954.802-1.974 1.53-2.9 2.36a1.34 1.34 0 0 1-.168.146c-23.96 21.8-34.881 53.872-30.726 90.316 4.62 40.737 26.94 81.156 62.841 113.823 35.908 32.67 80.335 52.977 125.113 57.186 35.118 3.36 66.547-3.919 89.899-20.461a97.255 97.255 0 0 0 9.365-7.501c2.925-2.661 5.569-5.5 8.086-8.416.3-.348.672-.673.975-1.024 8.253-9.864 14.222-21.067 17.996-33.148.639-2.034 1.051-4.148 1.564-6.227.381-1.563.81-3.106 1.112-4.693.555-2.784.923-5.632 1.253-8.49.086-.709.183-1.414.237-2.128.492-4.893.693-9.858.55-14.91h.013V521.623c-2.01-22.626-20.78-40.434-43.928-40.434h-57.23a8.071 8.071 0 0 1-8.077-8.073V340.564a7.132 7.132 0 0 1 7.136-7.133z'/></svg>");
+		}
+		.fa-file-image {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-128-448v320H256v-192l192-192 128 128 384-384zm-832-192c-106 0-192-86-192-192s86-192 192-192 192 86 192 192-86 192-192 192z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-pdf {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-514-593c25 20 53 38 84 56 42-5 81-7 117-7 67 0 152 8 177 49 7 10 13 28 2 52-1 1-2 3-3 4v1c-3 18-18 38-71 38-64 0-161-29-245-73-139 15-285 46-392 83-103 176-182 262-242 262-10 0-19-2-28-7l-24-12c-3-1-4-3-6-5-5-5-9-16-6-36 10-46 64-123 188-188 8-5 18-2 23 6 1 1 2 3 2 4 31-51 67-116 107-197 45-90 80-178 104-262-32-109-42-221-24-287 7-25 22-40 42-40h22c15 0 27 5 35 15 12 14 15 36 9 68-1 3-2 6-4 8 1 3 1 5 1 8v30c-1 63-2 123-14 192 35 105 87 190 146 238zm-576 411c30-14 73-57 137-158-75 58-122 124-137 158zm398-920c-10 28-10 76-2 132 3-16 5-31 7-44 2-17 5-31 7-43 1-3 2-5 4-8-1-1-1-3-2-5-1-18-7-29-13-36 0 2-1 3-1 4zm-124 661c88-35 186-63 284-81-10-8-20-15-29-23-49-43-93-103-127-176-19 61-47 126-83 197-15 28-30 56-45 83zm646-16c-5-5-31-24-140-24 49 18 94 28 124 28 9 0 14 0 18-1 0-1-1-2-2-3z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-word {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM233 768v107h70l164 661h159l128-485c5-15 8-30 10-46 1-8 2-16 2-24h4l3 24c3 14 4 30 9 46l128 485h159l164-661h70V768h-300v107h90l-99 438c-4 16-6 33-7 46l-2 21h-4c0-6-2-14-3-21-3-13-5-30-9-46L825 768H711l-144 545c-4 16-5 33-8 46l-4 21h-4l-2-21c-1-13-3-30-7-46l-99-438h90V768H233z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-powerpoint {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-992-234v106h327v-106h-93v-167h137c43 0 82-2 118-15 90-31 146-124 146-233s-54-193-137-228c-38-15-84-19-130-19H416v107h92v555h-92zm353-280H650V882h120c35 0 62 6 83 18 36 21 56 62 56 115 0 56-20 99-62 120-21 10-47 15-78 15z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-excel {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-979-234v106h281v-106h-75l103-161c12-19 18-34 21-34h2c1 4 3 7 5 10 4 8 10 14 17 24l107 161h-76v106h291v-106h-68l-192-273 195-282h67V768H828v107h74l-103 159c-12 19-21 34-21 33h-2c-1-4-3-7-5-10-4-7-9-14-17-23L648 875h76V768H434v107h68l189 272-194 283h-68z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-audio {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM620 850c12 5 20 17 20 30v544c0 13-8 25-20 30-4 1-8 2-12 2-8 0-16-3-23-9l-166-167H288c-18 0-32-14-32-32v-192c0-18 14-32 32-32h131l166-167c10-9 23-12 35-7zm417 689c19 0 37-8 50-24 83-102 129-231 129-363s-46-261-129-363c-22-28-63-32-90-10-28 23-32 63-9 91 65 80 100 178 100 282s-35 202-100 282c-23 28-19 68 9 90 12 10 26 15 40 15zm-211-148c17 0 34-7 47-20 56-60 87-137 87-219s-31-159-87-219c-24-26-65-27-91-3-25 24-27 65-2 91 33 36 52 82 52 131s-19 95-52 131c-25 26-23 67 2 91 13 11 29 17 44 17z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-video {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM768 768c70 0 128 58 128 128v384c0 70-58 128-128 128H384c-70 0-128-58-128-128V896c0-70 58-128 128-128h384zm492 2c12 5 20 17 20 30v576c0 13-8 25-20 30-4 1-8 2-12 2-8 0-17-3-23-9l-265-266v-90l265-266c6-6 15-9 23-9 4 0 8 1 12 2z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-archive {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M640 384V256H512v128h128zm128 128V384H640v128h128zM640 640V512H512v128h128zm128 128V640H640v128h128zm700-388c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H768v128H640V128H128v1536h1280zM781 943c85 287 107 349 107 349 5 17 8 34 8 52 0 111-108 192-256 192s-256-81-256-192c0-18 3-35 8-52 0 0 21-62 120-396V768h128v128h79c29 0 54 19 62 47zm-141 465c71 0 128-29 128-64s-57-64-128-64-128 29-128 64 57 64 128 64z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-code {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM480 768c11-14 31-17 45-6l51 38c14 11 17 31 6 45l-182 243 182 243c11 14 8 34-6 45l-51 38c-14 11-34 8-45-6l-226-301c-8-11-8-27 0-38zm802 301c8 11 8 27 0 38l-226 301c-11 14-31 17-45 6l-51-38c-14-11-17-31-6-45l182-243-182-243c-11-14-8-34 6-45l51-38c14-11 34-8 45 6zm-620 461c-18-3-29-20-26-37l138-831c3-18 20-29 37-26l63 10c18 3 29 20 26 37l-138 831c-3 18-20 29-37 26z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-alt, .fa-file-csv {
+      /* fork-awesome doesn't have csv so we use the text icon */
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM384 800c0-18 14-32 32-32h704c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64zm736 224c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704zm0 256c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		blockquote {
+			border-left: 4px solid rgb(220, 220, 220);
+			padding-left: 1.2em;
+			margin-left: 0;
+			opacity: 0.7;
+		}
+
+		.jop-tinymce table,
+		table {
+			text-align: left;
+			border-collapse: collapse;
+			border: 1px solid rgb(220, 220, 220);
+			background-color: #ffffff;
+		}
+
+		.jop-tinymce table td, .jop-tinymce table th,
+		table td, th {
+			text-align: left;
+			padding: .5em 1em .5em 1em;
+			font-size: 15;
+			color: #32373F;
+			font-family: 'Avenir Next', 'Avenir', 'Arial', sans-serif;
+		}
+
+		.jop-tinymce table td,
+		table td {
+			border: 1px solid rgb(220, 220, 220);
+		}
+
+		.jop-tinymce table th,
+		table th {
+			border: 1px solid rgb(220, 220, 220);
+			border-bottom: 2px solid rgb(220, 220, 220);
+			background-color: rgb(247, 247, 247);
+		}
+
+		.jop-tinymce table tr:nth-child(even),
+		table:has(thead) tr:nth-child(even) {
+			background-color: rgb(247, 247, 247);
+		}
+
+		.jop-tinymce table tr:hover,
+		table tr:hover {
+			background-color: #e5e5e5;
+		}
+
+		hr {
+			border: none;
+			border-bottom: 2px solid #dddddd;
+		}
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		
+		.inline-code,
+		.mce-content-body code {
+			border: 1px solid rgb(220, 220, 220);
+			background-color: rgb(243, 243, 243);
+			padding-right: .2em;
+			padding-left: .2em;
+			border-radius: .25em;
+			color: rgb(0,0,0);
+			font-size: .9em;
+		}
+
+		.highlighted-keyword {
+			background-color: #F3B717;
+			color: black;
+		}
+
+		
+	.not-loaded-resource img {
+		width: 1.15em;
+		height: 1.15em;
+		background: white;
+		padding: 2px !important;
+		border-radius: 2px;
+		box-shadow: 0 1px 3px #000000aa;
+	}
+
+	a.not-loaded-resource img {
+		margin-right: .2em;
+	}
+
+	a.not-loaded-resource {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+
+		.md-checkbox input[type=checkbox]:checked {
+			opacity: 0.7;
+		}
+
+		.jop-tinymce ul.joplin-checklist .checked,
+		.md-checkbox .checkbox-label-checked {
+			opacity: 0.5;
+		}
+
+		.exported-note {
+			padding: 1em;
+		}
+
+		.joplin-editable .joplin-source {
+			display: none;
+		}
+
+		mark {
+			background: #F7D26E;
+			color: black;
+		}
+
+		/* =============================================== */
+		/* For TinyMCE */
+		/* =============================================== */
+
+		.mce-content-body {
+			/* Note: we give a bit more padding at the bottom, to allow scrolling past the end of the document */
+			padding: 5px 10px 10em 0;
+		}
+
+		/*
+		.mce-content-body code {
+			background-color: transparent;
+		}
+		*/
+
+		.mce-content-body [data-mce-selected=inline-boundary] {
+			background-color: transparent;
+		}
+
+		.mce-content-body .joplin-editable {
+			cursor: pointer !important;
+		}
+
+		.mce-content-body.mce-content-readonly {
+			opacity: 0.5;
+		}
+
+		/* We need that to make sure click events have the A has a target */
+		.katex a span {
+			pointer-events: none;
+		}
+
+		.media-player {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		.media-player.media-pdf {
+			min-height: 35rem;
+			width: 100%;
+			max-width: 1000px;
+			margin: 0;
+			border: 0;
+			display: block;
+		}
+
+		/* Clear the CODE style if the element is within a joplin-editable block */
+		.mce-content-body .joplin-editable code {
+			border: none;
+			background: none;
+			padding: 0;
+			color: inherit;
+			font-size: inherit;
+		}
+
+		/* To make code blocks horizontally scrollable */
+		/* https://github.com/laurent22/joplin/issues/5740 */
+		pre.hljs {
+			overflow-x: auto;
+		}
+
+		.joplin-table-wrapper{
+			overflow-x: auto;
+			overflow-y: hidden;
+		}
+
+		/* =============================================== */
+		/* For TinyMCE */
+		/* =============================================== */
+
+		@media print {
+			body {
+				height: auto !important;
+			}
+
+			pre {
+				white-space: pre-wrap;
+			}
+
+			.code, .inline-code {
+				border: 1px solid #CBCBCB;
+			}
+
+			#joplin-container-content {
+				/* The height of the content is set dynamically by JavaScript (in updateBodyHeight) to go
+				   around various issues related to scrolling. However when printing we don't want this
+				   fixed size as that would crop the content. So we set it to auto here. "important" is
+				   needed to override the style set by JavaScript at the element-level. */
+				height: auto !important;
+			}
+		}
+	
+
+				.joplin-frontmatter-rendered {
+					margin-bottom: 1em;
+				}
+				.joplin-frontmatter-rendered pre.hljs {
+					margin: 0;
+					border-radius: 0;
+					white-space: pre-wrap;
+					word-break: break-word;
+				}
+				.joplin-frontmatter-marker {
+					margin: 0;
+					border: none;
+					border-top: 2px solid var(--joplin-divider-color, #ccc);
+				}
+			
+
+				/*
+					FOR THE MARKDOWN EDITOR
+				*/
+
+				/* Remove the indentation from the checkboxes at the root of the document
+				   (otherwise they are too far right), but keep it for their children to allow
+				   nested lists. Make sure this value matches the UL margin. */
+
+				li.md-checkbox {
+					list-style-type: none;
+				}
+
+				li.md-checkbox input[type=checkbox] {
+					margin-left: -1.71em;
+					margin-right: 0.7em;
+					position: relative;
+					top: 1px;
+				}
+				
+				ul.joplin-checklist {
+					list-style:none;
+				}
+
+				/*
+					FOR THE RICH TEXT EDITOR
+				*/
+
+				ul.joplin-checklist li::before {
+					content:"\f14a";
+					font-family:"Font Awesome 5 Free";
+					background-size: 16px 16px;
+					pointer-events: all;
+					cursor: pointer;
+					width: 1em;
+					height: 1em;
+					margin-left: -1.3em;
+					position: absolute;
+					color: #32373F;
+				}
+
+				.joplin-checklist li:not(.checked)::before {
+					content:"\f0c8";
+				}
+
+				.abc-notation-block svg {
+					background-color: white;
+				}
+				.joplin-abc-notation-rendered {
+					overflow-x: auto !important;
+					overflow-y: hidden;
+				}
+				@media print {
+					.joplin-abc-notation-rendered {
+						overflow: visible !important;
+					}
+
+					.joplin-abc-notation-rendered svg {
+						max-width: 100% !important;
+						height: auto !important;
+					}
+				}
+			
+.mermaid { width: 640px; }
+pre.mermaid[data-processed=true] { white-space: unset; }
+.mermaid-export-graph {
+					opacity: 0;
+					height: 0;
+					z-index: 1;
+					position: relative;
+				} 
+				.joplin-editable:hover .mermaid-export-graph,
+				.joplin-editable .mermaid-export-graph:has(:focus-visible) {
+					opacity: 1;
+				}
+				.mermaid-export-graph > button:hover {
+					background-color: #CBDAF1 !important;
+				}
+
+				.joplin-youtube-player-rendered {
+					width: 100%;
+					max-width: 100%;
+				}
+				.joplin-youtube-player-rendered iframe {
+					width: 100%;
+					aspect-ratio: 16 / 9;
+				}
+			</style><div id="rendered-md"><p>* адрес оригинальной публикации в evernote: [17.04.2022 07:51] Konstantin Makarov: <a data-from-md title='https://www.evernote.com/shard/s3/sh/ca918791-e41b-ee14-d49d-41a5b8f06a6f/e51c81fff5fdae1e5257be108df34d0a' href='https://www.evernote.com/shard/s3/sh/ca918791-e41b-ee14-d49d-41a5b8f06a6f/e51c81fff5fdae1e5257be108df34d0a'>https://www.evernote.com/shard/s3/sh/ca918791-e41b-ee14-d49d-41a5b8f06a6f/e51c81fff5fdae1e5257be108df34d0a</a><br>
+[17.04.2022 08:00] Tatiana Melnik: Шедеврально!!!</p>
+<p> </p>
+<img src="../_resources/1c401909955768ca6f213a05d8a2ce28.png" alt="image.png" width="339" height="249" class="jop-noMdConv"/>
+<p>Попросили меня тут коллеги рассказать про хобби)</p>
+<p>Привет, меня зовут Костя,</p>
+<p>я программист, и меня покусали скалолазы.</p>
+<img src="../_resources/82d991ba49b718ed05c8773ef8f4e427.jpg" alt="2XvSW4PEiaJC4W-ykrkNfwZpUMrBpjrLItfYeFb0RF9BHil30yJJcP1Q3s8yCROs7mVr7PfZ7ve9M_Bv9HiuIILKE0lV3YT4QydrqaumC79uK_iWQjiV2-F9CAlAqgijKyAeRQdMlbCwrUAeS-oHw7pvsZM9VGBRK7dwzSNJyvnn9OTkaVn6DKO-yCL7ZFTfwJ_oGdEbK_-TF1u6RHsTsidD_MnOKXxdeklzDdFtXFyWgQX48uNP0HcHm1S-yvuxokhIkbCg1ItUXfLHgtRWQ8640glCk9UOCDn1W775Qhvedoko286g69UiS0DfRLyFj9dZK7yKYqbVuK5lrQBKKQ3jFRPrnI3ibDeGWTRFE-T8C5SNYwvc004FlapLzK-ytJI1SFYV-j5IlMXbO7BjBMeC-6lJK_VrR-XU4aHbDlyVAYrE0c2Nt9EXKPZtDke9KWrcDFxRwmOBfUYQ96btez58P6TmToT92WxvmmqJL2hRG4BY2sp0OsBsAT3C6YAm_Iw9u2XLndWo_0wRSYMh1cATQR33CvfvMWAJ_iJlflPNkFv7qiJLz8GbCj9LcRq5fIxJWA-yk_8JuU_kDemByeWc3UL7LJq6t_eq8Gm1Gz-iqniMh46Du-cNpYarX6VEl2lkacxnQu3RjELCvltG-T3fO9MrDaUgBxQI5WA3Pgdly5GWgnkghsFe_X9mYXYIFzQvLaJUpHO0pFQxXZLA9Sq7sAfN1k_OzmwANNqfZ4KmhOFQPcxCOt2r7IHiY=w1514-h2018-no" width="337" height="449" class="jop-noMdConv"/>
+<p>Покусанный скалолазом — сам становится скалолазом, заражает свою семью и при всякой возможности старается укусить окружающих и прочих неосторожных. Не путать с альпинистами! Те вообще работу бросают и в горы уходят.</p>
+<p><em>&quot;В конце жизненного пути ты не вспомнишь о времени,</em></p>
+<p><em>что потратил, работая в офисе или подстригая свой газон.</em></p>
+<p><em>Лезь на эту чертову гору.&quot;</em></p>
+<p><em>Джек Керуак</em></p>
+<h3 id="почему-скалолазание">Почему скалолазание?</h3>
+<p>Не сказал бы, что совсем ничего не предвещало, вырос я вполне себе в горной местности, скалы местами торчали тут и там, внушали своим видом, ну и вызывали всяческие опасения, если обойти-зайти сверху и посмотреть оттуда вниз. Всякому нормальному человеку это жутко интересно и страшно, но к обычному житию и пропитанию никакого сродства не имеет.</p>
+<p>По телевизору же время от времени показывали всякие интересные фильмы, где люди пообвяжутся непонятными верёвками, а потом у них внезапно карабины-ролики всякие расстёгиваются и они оттуда трагично падают.  В общем, откуда-то в голове поселилось понятие &quot;скалолаз&quot;, ещё до просмотра одноименного фильма со Сталлоне, который, к слову, про другое вообще. Отношение же ко всему этому было скорее как благоговейно-недостижимому,  вроде &quot;в цирке вон тоже акробаты чего на трапециях и канатах вытворяют&quot;.</p>
+<img src="../_resources/91d41ddba78644a4b9dfe575f5232254.png" alt="e30596108f20fa1c58b7ff1fadca7038.png" width="736" height="615" class="jop-noMdConv"/>
+<p>Прошли годы, ... Я вроде немного притёрся в Рамаксе, и вот коллега по кабинету:</p>
+<p>- Хочешь на скалодром?</p>
+<p>- Ээ..</p>
+<p>- Бесплатно проведу.</p>
+<p>- Ну давай.</p>
+<p>С соседнего стола:</p>
+<p>- А я ж тебя уже звал! чо со мной не пошёл тогда?</p>
+<p>о_О а я и не помню.. или что-то смутное, навроде: &quot;Ну его, это ж поди экипировка нужна, что-то учить, куда-то ехать&quot;...</p>
+<p>В общем эти двое добрых товарищей меня с моей женой провели — акция у них на скалодроме такая бессрочная: &quot;Приведи друга&quot;.</p>
+<p>Знакомо, только им ничего за это не дают, просто такое само-расширяющееся сообщество.</p>
+<p><strong>— получается, поэтому. Так совпало. Хорошо, что не покер.</strong></p>
+<h3 id="что-это-такое-в-чем-смысл">Что это такое, в чем смысл?</h3>
+<p>В первый раз мы сами по себе, ничего не понятно было, конечно — глаза разбегаются от обилия разноцветных зацепок на стенках.</p>
+<p>Люди кругом что-то пытаются лезть, как-то сложно, зачем-то выгибаются, прыгают, падают. Чего мучаются?</p>
+<img src="../_resources/e807244e9d284a728f2f57f963a0ea93.png" alt="616dd733f8a505d6ec5b44d8d90913c0.png" width="693" height="315" class="jop-noMdConv"/>
+<p>Поэтому если кто соберётся — сразу рекомендую записываться в групповые занятия для начинающих, будет повеселей.</p>
+<p>Я же, чтоб два раза не вставать, взял пробный абонемент, ещё через занятие пошёл в магазин за первой парой скальных туфель.</p>
+<p>Да, магия скалолазания — по большому счёту, чтобы лезть, нужны только руки и ноги.</p>
+<p>То есть цель спортивного скалолазания — пролезть маршрут &quot;чисто&quot;, без вспомогательного железа, верёвок, используя только силу и возможности своего тела, пользуясь либо естественным скальным рельефом, либо предоставленными на стенде зацепками.</p>
+<p>В наше время ноги обувают в скальные туфли — очень плотно облегающая обувь, в них можно стоять на каменных выступах-&quot;пупырышках&quot; размером с напёрсток.</p>
+<p>Чтобы руки не потели — мешочек с белым порошком, ха-ха, магнезией.</p>
+<p>Скальники на ногах и магнезия на пальцах — гармоничное сочетание, как инь и янь.</p>
+<p><img src="../_resources/2984b245d5d71974a6a9a3964f819073.png" alt="image.png"></p>
+<p>Есть три дисциплины (вида):</p>
+<ol>
+<li>
+<p>Скорость — стандартные (эталонные) и не очень трассы на время.</p>
+</li>
+<li>
+<p>Трудность — лазание с верёвкой подготовленных маршрутов на скалах или в залах на высоких стенках.</p>
+</li>
+<li>
+<p>Боулдеринг — лазание без верёвки, невысоко, на валуны, но по возможности над страховочными матами, чтоб падать не больно было.</p>
+</li>
+</ol>
+<p>Падать приходится много. Ну или срываться, повисая на верёвке. К этому привыкаешь, это норма и это весело.</p>
+<img src="../_resources/a243ad00463ede6aea53d7a66b9113fb.png" alt="image.png" width="672" height="504" class="jop-noMdConv"/>
+<p>В трудности и боулдеринге трассы различаются категориями — по уровню сложности. Повышать свой уровень можно почти бесконечно, потому что, добравшись до своего естественного предела, подняться на следующую категорию — может занять годы, в зависимости от упорства и системности тренировок.</p>
+<p>Как бы ты ни был крут, на следующей трассе в твоей категории всегда найдётся зацепка или движение, которые собьют с тебя всю спесь.</p>
+<p>В этом спорте все переживают одно и то же — и новички, и профи.</p>
+<p>Хрупкие женщины лезут на равных с мужчинами, а на многих трассах даже имеют преимущество.</p>
+<img src="../_resources/f5e3182c3a6f4b3e9b0d0d3ff6bbb0c4.png" alt="a7d1722a3c88fcde47901068b3f7c389.png" width="331" height="472" class="jop-noMdConv"/>
+<h3 id="зачем-лезть-наверх">Зачем лезть наверх?</h3>
+<p>В принципе — незачем, оставайтесь, как сказал классик ... внизу</p>
+<img src="../_resources/208182162ffe42abacb2d37f71314c6d.png" alt="1505e4f3c8791e338fc455867743c124.png" width="304" height="541" class="jop-noMdConv"/>
+<p>Бессмысленно — с таким трудом карабкаться наверх, чтобы сразу потом спускаться вниз, но почему-то довольным.</p>
+<img src="../_resources/9f7e3e4b6e97dff04cec8ee59f5e898b.jpg" alt="Y5Q1HaLdAmo.jpg" width="369" height="492" class="jop-noMdConv"/>
+<p>Не менее глупо быть в очередной раз уверенным, что в следующий-то раз точно получится залезть и не сорваться.</p>
+<img src="../_resources/0b35f90c11638c3406194760f1ec285f.jpg" alt="5dX3LVtVbvM.jpg" width="752" height="501" class="jop-noMdConv"/>
+<p>Вдруг снова замечать в себе забытый страх высоты — весьма щекотливое чувство.</p>
+<p><img src="../_resources/7e2d226c88a89a7b943d624d8ceb254e.png" alt="image.png"></p>
+<p>По итогу всех трудов, никому вокруг неинтересно, как ты пролез то самое сложное место, но тебе именно сейчас рассказать им всё равно нужно, лучше даже показать, размахивая в воздухе руками, и смешно задирая ноги прямо посреди вагона метро.</p>
+<p>А ещё все лезут совершенно по-другому, и страхуют неправильно, в общем, всегда есть о чём поговорить.</p>
+<img src="../_resources/57552649c1b7c605c132dd85daa08ad1.jpg" alt="vnDjc4IeNh0.jpg" width="699" height="466" class="jop-noMdConv"/>
+<p>И народ там сплошь доброжелательные зайки, аж скулы сводит.  Половина из них, кажется, прямо живёт на скалодроме или на камнях.</p>
+<p><img src="../_resources/2bb7bfa4f66f08732d58adf8e33c6bde.png" alt="image.png"></p>
+<p>Вообще, хватит развивать скалолазание — <s>скалодромов в Питере уже больше, чем в Москве</s> (upd май 2026 - закрылись 4, стало меньше T_T ),</p>
+<p> а на лесных парковках под карельскими скалами летом машину некуда воткнуть.</p>
+<p><img src="../_resources/8897900f797f5fe7eebfd75340b1dae1.png" alt="image.png"></p>
+<h3 id="как-это-помогает-в-работе">Как это помогает в работе?</h3>
+<p>Простой ответ — никак.</p>
+<img src="../_resources/e5a6b75fcbe5423d8e35a7b8f2b5ea59.png" alt="2969ce67f665cc498d29421017130dc0.png" width="732" height="412" class="jop-noMdConv"/>
+<p>Сложный — в жизни, говорят, должен быть равновесный баланс между семьёй, работой, отдыхом, дружбой, чем-то там ещё, вроде.</p>
+<img src="../_resources/f8787d7cc91143c5a54db068cbc80467.png" alt="c7feb5809b286144b798627d80e51ae2.png" width="585" height="1040" class="jop-noMdConv"/>
+<p>Время нынче трудное (тогдашнее трудное точно было проще, ведь, да?), все эти балансы сильно &quot;поехали&quot;.</p>
+<img src="../_resources/e7a379ecadea1b59299af5430600e165.jpg" alt="c3DOLvtaJNYsz1g91WgH1kJHdepqiCStBtLBuJncuEbdw-vVqBASXWpI4OkOElRC6fBFxDdAUe-anYD9V7Ld_SQ8wgQWRWDFVXZrX1vNV3CTBoeVwzCFD3PL4uRS2gGB2cVo-8wL1c4bEs11eXYUWgauwip6bMxxQ09lQteS24-dTWN2AxKR79xxElfTl4MrVSK1H9IAJ4IX6mOWEwCvWVBLk3AJVgK8p5TL1k-RtXyOOaFyJ2BiLBB1BcJD47ajkKsv1bdeAW3jPopxj91Xp9ct_f96XNdJLJ-D4-icJdAWwypj-CWcImIySriZKtY5vupTFRZlZW8qizdjZeMjnklrXlbddDuy7QF_eqB6Xpb79xQb9wDf6CK4eZf5RZApQv5fEsVtPzwegbWNJjb6YSOuIg2eKyoHwrYN4bAo7fehHWWT4cOTwBkD1DKkzg2gB0grMFz2fngtE3tqYr4EKKe2AyH3Ncce95PdcThe6rJ3XWWVBptqpTqWvOqmMkQ_1OUmWsAarRre-HtSpkXo5J3zPbPt5w_7kdrYzCRpIzoqCwVTfJCo0w64ViyWPrG4c_REKtoM3NT0mGWL6lrlcQfCb3OKsYuyM_4IXEAPia1hHnNN_2muuerTrRzKAIe79gfeeGS1iKJjRvA38Vf2lg-uhILZmXx2YrF1P3UfdfdeQJOApRdpdXchHjx_uHuTOK6Bm5vaC2MIfoWmGX8Znc9NSbcWp9PEdmgneY02fdnJbs7UAjTJrx4aSMnMDg4=w2944-h1656-no" width="766" height="431" class="jop-noMdConv"/>
+<p>Поэтому цель простая: каждые солнечные выходные ночевать там в лесу.</p>
+<img src="../_resources/c32b45ba6d5301c3d7d8edca4d46f238.jpg" alt="6Rq4YirqK0jNgwIxRKPZrdv_8vIjCfcSAPQzCzoKEou2fVOUj2WGJmPkwBmTtXxCt5Cwrs6TNs7xOxgsEqaB11-UNjTpLn8TbxUlsA3H2WepvcVQDg9sKTVAo20J5zOpI6--MGvObygDRE6QwVSbCsDyksO5mbCRJixYJMDjHG8OaHCdyg_CNyZnlAlM77rQDnkd7W3JsHefDrQwYS9Ds1DiIuYiLoQgmA68RXzwoBCtSPc-Z8Shewjp21RLRvtbhaYBsOUlxen6IOpYDt0tcUxtXzVjsacRRWFhIjCOjLl5W7mCVyJfDV1xVzBsTULkxMFbl1MLNU75A82HpvZYm92XaKr7eC17izj4m-c6x7jo7fQRxKB4Pek2CxOb81kDjLxW_UY_QZvRK5Dyrory5hsZvY14UP4sTLPhCUlEm0Few0V7BUYKSm0x_NimpIY_-bu4yCfbudaVXsbc6Ny1SbVROB5Mja1qiakX8Itr5viszeudSYXWf0A2tK9YfrU6rramY7MSRhHBA2eePc9NEfJ3_9un9JlP9l-kPtEFZNXv7TKEaozzczNwy6YaCUATU7FBc5TBUnoIGruCyofHBSk_eDzDVwDjkE-CDaIcHYlj5mTSBi2NTSPRXju14yIgTNlEwo1OX6rtRn8Te_sB2RRnqq0amUG1N7-Nvmt-AESIwoAE0vZdtNLrenBgZyR2JNm9sj9vS0QzEVtZawXp8_WeLaKh0AIuszk_RPCWZFPlf1P6_JBXKOaM0sj7_9U=w2692-h2020-no" width="792" height="594" class="jop-noMdConv"/>
+<p>Или хотя бы одним днём выехать — полазать по скалам.</p>
+<p>Потому что в скалолазании главное — скалы.</p>
+<img src="../_resources/ee8cfea74df7e1003564228d293a99ec.jpg" alt="2p0MXfg5us0vF1IMU_zYgDdYpYUGr2O0sKtZE3FuNsOM2xZ5zdFCLPjiSXzGYEmPY06kZ1J5mn396EDm2wtIPhnXDAMNg0qesckqv7Ymoll3jIwEXOsKlY4dU0FdQEhqJFCVPA_7GX0Y4bJH9y76I58s_qM5Bof-Tfwkv6tp43PMFg2XUJbQiS3b4t5qtNT2P9ocxGpVUsZdtvwehknNqMeTqNBuLBQCfr7Eth2ZbecVMafiob3O52QjGsVNyxgH2p3Qq_WwPD14nDZmjXnOYWaBqVmEdR2lC2r5u-D8QBzwJYQ7jRy0AJjhlklBhrJRLIXWYa5pRO4wz2w9CSrs3qCAm8i8uK8wE_sHw-Vgx7vPd4iJLBkgDMT1g66tYIuiv3TCMZJeJ4DRNmUX0j0slmwT6yYQzxByifqsaHoxusqZRVkGbw6QyolJ1q_vF0jBf-waa59I4NANZ1MR9ezFAwMo4xQ9PfXdoRRwSQh9codQIxujDpuYi0ymabaO-SXSkFmnXnPBXyeTYGv2UzuUGdpQ8tlAQAH3W-ZhoJ2N-nYq8nvRJ4Xkp7OizeW074l_g1h2fqMKD1n6Zm8y_vZArEZNijiRwbIGncWQzCwfBJ1S5wAA0FJ5evf4XOpkS7vF6qQyCPkuVxntiv_bokpJuP4i05KFPAn2xEs-pwATUEr4xEcVtBUNif7v6UHZbivVlFJV-V2Ez8GKhM0lZ_geYxXPwbf_-pyP9ETIJJCFIKcD5k1JY-BS8CPnXkj8Dg=w2944-h1656-no" width="789" height="444" class="jop-noMdConv"/>
+<p>Я не понимаю, как можно быть gym-only — кажется так себя называют те из наших западных партнёров, которые тренируются только в залах на искусственных рельефах.</p>
+<p><img src="../_resources/a077bfaf476573742b6350d3ed0c5588.png" alt="image.png"></p>
+<p>А тут целыми семьями, с детьми (кто их спрашивал?) выбираются, радуются движению на свежем воздухе. Фестивали проводят (не был пока ни на одном), соревнуются.</p>
+<img src="../_resources/5bb17e01c0eb4d16b1870ee8b220b56c.png" alt="e2b6186ddcbbd1b81449483852c53cda.png" width="719" height="959" class="jop-noMdConv"/>
+<p>Можно ещё порассказывать, что спина перестала болеть, дескать, &quot;мышечный корсет&quot; укрепился, наверняка кровоснабжение мозга улучшилось, тонус, всё такое.</p>
+<p><img src="../_resources/b2040afaffd051b21c2158cea5f162fa.png" alt="image.png"></p>
+<p>Плавание, наверное, не менее полезно.</p>
+<p>Однако, когда тебя молодого и крепкого облезает дядька лет уже далеко под 60, а потом его скромная и кроткая супруга-напарница вылезает ту же трассу, чтоб забрать с неё свои оттяжки — с непривычки не сразу подобрать челюсть вспоминаешь.</p>
+<p><img src="../_resources/51ac189ddae8a8594c013734d94b55c0.jpg" alt="VQOENcStb6c.jpg"></p>
+<h3 id="если-хочется-попробовать">Если хочется попробовать</h3>
+<p>Ближайший скалодром. Как сказал — лучше спросить, когда стартует новая группа новичков (обычно вводных 3-4 занятия для 4-8 чел.). Скальные туфли, магнезию, и даже обвязку с верёвкой, если есть высокая стенка, обычно предоставляют. При каждом скалодроме есть прокат.</p>
+<p>Скалодромные тренеры в летний сезон организовывают выезды на настоящие скалы, и всё же перед этим лучше попробовать в зале. Лазание по суровому карельскому граниту для новичков-перворазников — это боль.</p>
+<img src="../_resources/1091f50e6c3ffd8dd12aaf7e06d1b80a.jpg" alt="2O4PUObkVbvZ7UrvZpdBsw-6SfvuYN2TtBpv0mifqwcONc551j_P4vsWh6EbG42y78-nufuk1CIXMhUu9chXin_jXG8mt_SfovLYWto1Nvw3gmT-l0gQCxFbJvizYKaMNu1XXMop4idD1yonYuF0PxohSfNS5P4w9hqVv_3pbWKLBsF4VNSEiBNC5lhgKEQX9qQqHoXlWF80UZQ2rKcBAELOTF8rvKVskaToTettogSA6c_eerLe9Lz0E0G53rSvqkaFJlac_TfrUaacURnAqnhi_s_LQkNNK6r-DG6R364sDYp7oCA5oEoiEHgMU2Ihgt3Q-yxfNw7qblN1S04YaHYU8z0PRgvHlkfgtMB--dZON1KZWfT9ZulJPrMZ2pJgVtzMp68v8xGfE4fmAvLeHjJeZkmdwnPQ6dwTc5sTqpYpreAypTy3pXKUprDvVNpFLVZHSaxIzU-O-KfzYWibwSj62pl1bkEzRX-AAP3he0ImThxoexRcY5H3CU7VZOTMZrFVerCeQ1zT1gisFrhtOmb52pemdXuQNxQsHkZDPltIK_668cTQ_oYqD8nHs9fwzAXgGCicB4c-LmzGH3gh8fSyG-MwVzz2MLkOvNbKUZB2G67siNBhCjhIIczis4KCMm_06smMiYPg7WA5AZYjSBzRa_ycBFUvgJ_6BCLUCwe_BHG9w289i0AEUnrzDNmCZYVzUFsb0KqpC3RF9OVRyBi8R1UdhmjupoIKle4mYvztoo1EhPssOg0GPgB0c4o=w1512-h2018-no" width="720" height="961" class="jop-noMdConv"/>
+<p>Скалолазы — люди заразительные (я сейчас не про ковид) своей энергией и коллективностью.</p>
+<p>Наверное потому что это такой особенный спорт, где все не просто тусуются, а действительно друг другу доверяют свои жизни.</p>
+<p>По-другому никак.</p>
+<img src="../_resources/67e97f8750af47e3bc65a05ee4d1c4df.png" alt="d1a84cdf54237ca848516b87f369ca42.png" width="711" height="533" class="jop-noMdConv"/></div></div>
+					</body>
+				</html>
+			
